@@ -8,15 +8,11 @@ public class DSL {
 
     private WebDriver driver;
 
-
-
     public DSL(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void clickButtonForm(String id){
-        driver.findElement(By.id(id)).click();
-    }
+
 
     public void checkSuccessMessage(String message){
         Assert.assertEquals(message,
@@ -40,19 +36,12 @@ public class DSL {
                 .selectByVisibleText(sex);
     }
 
-    public void clickButtonRegistrationPage(String className){
+    public void clickButtonWithClassName(String className){
         driver.findElement(By.className(className)).click();
     }
 
-    public void searchEmployee(String name){
-        WebElement inputResearchName = driver.findElement(By.xpath("//input[@type='search']"));
-        inputResearchName.click();
-        inputResearchName.sendKeys(name);
-    }
-
-    public void checkSearchEmployee (String name){
-        String userName = driver.findElement(By.xpath("//td[@class='text-center sorting_1']")).getText();
-        Assert.assertEquals(name, userName);
+    public void clickButtonWithId(String id){
+        driver.findElement(By.id(id)).click();
     }
 
     public void clickButtonEdit() {
@@ -71,8 +60,31 @@ public class DSL {
         Employees.click();
     }
 
-    public void clickButton(String id){
-        driver.findElement(By.id(id)).click();
+
+    public void searchEmployee(String name){
+        WebElement inputResearchName = driver.findElement(By.xpath("//input[@type='search']"));
+        inputResearchName.click();
+        inputResearchName.sendKeys(name);
+    }
+
+    public void checkSearchEmployee (String name){
+        String userName = driver.findElement(By.xpath("//td[@class='text-center sorting_1']")).getText();
+        Assert.assertEquals(name, userName);
+    }
+
+
+    public void setLogin(String name, String password){
+        setNameLoginPage(name);
+        setPasswordLoginPage(password);
+        clickButtonWithClassName("login100-form-btn");
+    }
+
+    public void setNameLoginPage(String name){
+        driver.findElement(By.name("username")).sendKeys(name);
+    }
+    public void setPasswordLoginPage(String password){
+        driver.findElement(By.name("pass")).sendKeys(password);
     }
 }
+
 
